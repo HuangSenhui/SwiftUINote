@@ -46,5 +46,9 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>NSSpeechRecognitionUsageDescription</key>
+	<string>你可以在应用中启用文字转录</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>音频用于在应用中进行转录，转录后音频将会删除</string>
 </dict>
 </plist>

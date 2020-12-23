@@ -9,9 +9,19 @@ import SwiftUI
 
 @main
 struct SwiftUINoteApp: App {
+    
+    @ObservedObject private var data = ScrumData()
+    
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            NavigationView {
+                ScrumsView(scrums: $data.scrums) {
+                    data.save()
+                }
+            }
+            .onAppear(perform: {
+                data.load()
+            })
         }
     }
 }
