@@ -13,10 +13,23 @@ struct SwiftUINoteApp: App {
     @StateObject private var modelData = ModelData()
     
     var body: some Scene {
-        WindowGroup {
+        let mainWindow = WindowGroup {
             ContentView()
                 .environmentObject(modelData)
         }
+        
+        #if os(macOS)
+        mainWindow
+            .commands {
+                LandmarkCommands()
+            }
+        
+        Settings {
+            LandmarkSettings()
+        }
+        #else
+        mainWindow
+        #endif
         
         #if os(watchOS)
         WKNotificationScene(controller: NotificationController.self, category: "LandmarkNear")
