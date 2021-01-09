@@ -11,9 +11,9 @@ import AVFoundation
 struct MeetingView: View {
     @Binding var scrum: DailyScrum
     @StateObject var scrumTimer = ScrumTimer()
-    @State private var transcript = ""
+    @State private var transcript = ""  // 转录结果
     @State private var isRecording = false
-    private let speechRecognizer = SpeechRecognizer()
+    private let speechRecognizer = SpeechRecognizer()   // 语音识别器
     var player: AVPlayer { AVPlayer.sharedDingPlayer }
     
     var body: some View {

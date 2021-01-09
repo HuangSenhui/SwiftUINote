@@ -11,11 +11,12 @@ import Speech
 import SwiftUI
 
 struct SpeechRecognizer {
+    // MARK: 语音识别
     private class SpeechAssist {
         var audioEngine: AVAudioEngine?
         var recognitionRequest: SFSpeechAudioBufferRecognitionRequest?
         var recognitionTask: SFSpeechRecognitionTask?
-        let speechRecognizer = SFSpeechRecognizer()
+        let speechRecognizer = SFSpeechRecognizer(locale: Locale(identifier: Locale.preferredLanguages.first!))
         
         deinit {
             reset()
@@ -33,6 +34,7 @@ struct SpeechRecognizer {
     private let assistant = SpeechAssist()
     
     func record(to speech: Binding<String>) {
+        print(Locale.preferredLanguages.first ?? "未识别出语言")
         relay(speech, message: "正在请求访问")
         canAccess { authorized in
             relay(speech, message: "访问被拒绝")
@@ -87,6 +89,7 @@ struct SpeechRecognizer {
         assistant.reset()
     }
     
+    // MARK: - 申请授权
     private func canAccess(withHandler handler: @escaping (Bool)->Void) {
         SFSpeechRecognizer.requestAuthorization { (status) in
             if status == .authorized {
