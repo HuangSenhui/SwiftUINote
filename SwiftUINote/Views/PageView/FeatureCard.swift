@@ -21,7 +21,7 @@ struct FeatureCard: View {
 struct TextOverlay: View {
     var landmark: Landmark
 
-    var gradient: LinearGradient {
+    private var gradient: LinearGradient {
         LinearGradient(
             gradient: Gradient(
                 colors: [Color.black.opacity(0.6), Color.black.opacity(0)]),

@@ -42,12 +42,15 @@ struct ProfileEditor: View {
             DatePicker(selection: $profile.goalDate, in: dateRange, displayedComponents: .date) {
                 Text("Goal Date").bold()
             }
+            
         }
     }
 }
 
 struct ProfileEditor_Previews: PreviewProvider {
     static var previews: some View {
-        ProfileEditor(profile: .constant(.default))
+        VStack {
+            ProfileEditor(profile: .constant(.default))
+        }
     }
 }

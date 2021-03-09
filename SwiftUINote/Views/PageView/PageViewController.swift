@@ -28,7 +28,7 @@ struct PageViewController<Page: View>: UIViewControllerRepresentable {
     func updateUIViewController(_ pageViewController: UIPageViewController, context: Context) {
         pageViewController.setViewControllers([context.coordinator.controllers[currentPage]],
                                               direction: .forward,
-                                              animated: true)
+                                              animated: false)
     }
 
     class Coordinator: NSObject, UIPageViewControllerDataSource, UIPageViewControllerDelegate {

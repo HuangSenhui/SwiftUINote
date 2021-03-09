@@ -24,7 +24,10 @@ struct LandmarkList: View {
     
 
     var filteredLandmarks: [Landmark] {
+        // 进行过滤
         modelData.landmarks.filter { landmark in
+            // 是否显示标记
+            // 是否选择分类
             (!showFavoritesOnly || landmark.isFavorite) &&
                 (filter == .all || filter.rawValue == landmark.category.rawValue)
         }
@@ -51,19 +54,22 @@ struct LandmarkList: View {
                 }
             }
             .navigationTitle(title)
+            .listStyle(InsetGroupedListStyle())
             .frame(minWidth: 300)   // watch 不支持最小宽度
             .toolbar(content: {
                 ToolbarItem {
                     Menu {
                         Picker("类别", selection: $filter) {
                             ForEach(FilterEnum.allCases) { category in
-                                Text(category.rawValue).tag(category)
+                                Text(category.rawValue)
+                                    .tag(category)
                             }
                         }
                         .pickerStyle(InlinePickerStyle())
                         
                         Toggle(isOn: $showFavoritesOnly, label: {
                             Label("最爱", systemImage: "star.fill")
+                                .foregroundColor(.orange)
                         })
                     } label: {
                         Label("筛选", systemImage: "slider.horizontal.3")
@@ -74,7 +80,8 @@ struct LandmarkList: View {
             
             Text("地标")
         }
-        .focusedValue(\.seletedLandmark, $modelData.landmarks[index ?? 0])
+        
+//        .focusedValue(\.seletedLandmark, $modelData.landmarks[index ?? 0])
     }
 }
 
