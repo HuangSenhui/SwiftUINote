@@ -15,6 +15,8 @@ struct MeetingView: View {
     @State private var isRecording = false
     private let speechRecognizer = SpeechRecognizer()   // 语音识别器
     var player: AVPlayer { AVPlayer.sharedDingPlayer }
+	
+	@State var isShowTranscript = true
     
     var body: some View {
         ZStack {
@@ -23,11 +25,37 @@ struct MeetingView: View {
             
             VStack {
                 MeetingHeaderView(secondsElapsed: $scrumTimer.secondsElapsed, secondsRemaining: $scrumTimer.secondsRemaining, scrumColor: scrum.color)
-                MeetingTimerView(speakers: $scrumTimer.speakers, isRecording: $isRecording, scrumColor: scrum.color)
+				if isShowTranscript {
+					ScrollView {
+						Text(transcript)
+							.foregroundColor(.black)
+							.font(.title)
+							.fontWeight(.bold)
+							.frame(maxWidth: .infinity, maxHeight: .infinity)
+							.padding()
+							.padding(.top, 50)
+					}
+				} else {
+					MeetingTimerView(speakers: $scrumTimer.speakers, isRecording: $isRecording, scrumColor: scrum.color)
+				}
                 MeetingFooterView(speakers: $scrumTimer.speakers) {
                     scrumTimer.skipSpeaker()
                 }
             }
+			
+			VStack {
+				Button(action: {
+					isShowTranscript.toggle()
+				}, label: {
+					Text(isShowTranscript ? "隐藏翻译" : "显示翻译")
+						.padding()
+						.background(Color.blue)
+						.cornerRadius(15)
+				})
+				.offset(y: 90)
+				
+				Spacer()
+			}
         }
         .padding()
         .foregroundColor(scrum.color.accessibleFontColor)
