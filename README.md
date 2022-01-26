@@ -1,3 +1,2 @@
 #  SwiftUI Note
-
-[Apple 教程](https://developer.apple.com/tutorials/app-dev-training/)
+  1. [Apple 教程](https://developer.apple.com/tutorials/app-dev-training/)
